@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kinglzr.shop/SHARKY_HERE/result.html by HTTrack Website Copier/3.x [XR&CO'2017], Fri, 11 Oct 2024 00:08:42 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main {
+      color: white;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url("../../i.ibb.co/vqWf0G7/images-1.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 300px;
+      height: 400px;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 0 15px red;
+    }
+
+    .box {
+      border: 10px solid red;
+      width: 250px;
+      height: 250px;
+      margin: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .result {
+      color: red;
+      font-size: 35px;
+      opacity: 1;
+    }
+
+    /* Animation for showing "BIG" or "SMALL" text */
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      50% {
+        transform: rotate(45deg);
+      }
+      100% {
+        transform: rotate(0deg);
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    #time {
+      position: absolute;
+      font-size: 20px;
+      right: 35%;
+      color: red;
+    }
+
+    .change {
+      position: absolute;
+      right: 35%;
+      bottom: 24%;
+      width: 100px;
+      height: 40px;
+      border-radius: 5px;
+      color: black;
+      background-color: red;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hide the button when it needs to disappear */
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <div class="card">
+    <div class="box">
+      <p class="result">RESULT</p>
+    </div>
+    <b><p id="time"></p></b>
+
+    <button class="change">CHANGE</button>
+  </div>
+</div>
+<script>
+  let text = document.getElementById("time");
+  let resultElement = document.querySelector('.result');
+  let changeButton = document.querySelector('.change');
+  let lastMinute = new Date().getMinutes();
+
+  // Update the time every second
+  setInterval(() => {
+    let d = new Date();
+    let currentMinute = d.getMinutes();
+    text.innerHTML = d.toLocaleTimeString();
+
+    // If the minute has changed, reset the button visibility and result text
+    if (currentMinute !== lastMinute) {
+      changeButton.classList.remove('hide'); // Show the button again at the start of a new minute
+      resultElement.innerHTML = 'RESULT'; // Reset the text to "RESULT"
+      resultElement.style.opacity = '1'; // Show "RESULT" normally
+      resultElement.style.animation = ''; // Remove animation for "RESULT"
+      lastMinute = currentMinute;
+    }
+  }, 1000);
+
+  // Handle button click
+  changeButton.addEventListener('click', () => {
+    const randomNumber = Math.floor(Math.random() * 4);
+    let resultText = '';
+
+    // Determine the result text based on the random number
+    if (randomNumber === 0 || randomNumber === 2) {
+      resultText = 'SMALL';
+    } else if (randomNumber === 1 || randomNumber === 3) {
+      resultText = 'BIG';
+    }
+
+    // Update the result with animation
+    resultElement.innerHTML = resultText; // Set the text to "BIG" or "SMALL"
+    resultElement.style.animation = 'fadeInScale 1s forwards'; // Apply animation only for "BIG" or "SMALL"
+
+    // Hide the button after it is clicked
+    changeButton.classList.add('hide');
+  });
+</script>
+</body>
+
+<!-- Mirrored from kinglzr.shop/SHARKY_HERE/result.html by HTTrack Website Copier/3.x [XR&CO'2017], Fri, 11 Oct 2024 00:08:43 GMT -->
+</html>
